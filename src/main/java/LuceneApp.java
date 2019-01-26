@@ -87,7 +87,6 @@ public class LuceneApp {
 
   public void commitWriter() throws IOException {
     indexWriter.commit();
-    closeReaderIfOpen();
     shouldResetReader = true;
   }
 
