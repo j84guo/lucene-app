@@ -4,43 +4,22 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.search.TermQuery;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 
 public class LuceneAppTest {
-  @BeforeSuite
-  public void setupSuite() {
-    System.out.println("@BeforeSuite");
-  }
 
-  @AfterSuite
-  public void cleanupSuite() {
-    System.out.println("@AfterSuite");
-  }
+  LuceneApp app;
 
   @BeforeClass
-  public void setupClass() {
-    System.out.println("@BeforeClass");
+  public void setupClass() throws Exception {
+    app = new LuceneApp();
   }
 
   @AfterClass
   public void cleanupClass() {
-    System.out.println("@AfterClass");
-  }
-
-  @BeforeMethod
-  public void setupMethod() {
-    System.out.println("@BeforeMethod");
-  }
-
-  @AfterMethod
-  public void cleanupMethod() {
-    System.out.println("@AfterMethod");
+    app.closeQuietly();
   }
 
   // assume default docs contain foo:bar
@@ -55,7 +34,6 @@ public class LuceneAppTest {
   // term query - field and value
   @Test
   public void testTermQuery() throws Exception {
-    LuceneApp app = new LuceneApp();
     Term term = new Term("title", "go");
     TermQuery query = new TermQuery(term);
     List<Document> res = app.search(query);
