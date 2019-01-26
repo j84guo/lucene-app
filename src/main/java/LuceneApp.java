@@ -99,13 +99,17 @@ public class LuceneApp {
     }
   }
 
-  public List<Document> search(String field, String queryText) throws ParseException, IOException {
+  public List<Document> search(String fieldName, String queryText) throws ParseException, IOException {
+    Query query = new QueryParser(fieldName, analyzer).parse(queryText);
+    return search(query);
+  }
+
+  public List<Document> search(Query query) throws IOException {
     if (shouldResetReader) {
       resetReader();
       shouldResetReader = false;
     }
 
-    Query query = new QueryParser(field, analyzer).parse(queryText);
     TopDocs topDocs = indexSearcher.search(query, 10);
 
     List<Document> results = new ArrayList<>();
