@@ -90,8 +90,8 @@ public class LuceneApp {
         }
     }
 
-    // we provide a way to close both the reader and writer
-    public void close() {
+    // we provide a way to close both the reader and writer quietly
+    public void closeQuietly() {
         try {
             indexReader.close();
         } catch (IOException e) {}
