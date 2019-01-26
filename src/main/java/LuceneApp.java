@@ -19,7 +19,6 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 
-
 public class LuceneApp {
 
     private Directory index;
@@ -85,12 +84,13 @@ public class LuceneApp {
         shouldResetReader = true;
     }
 
-    public void closeReaderIfOpen() throws IOException {
+    private void closeReaderIfOpen() throws IOException {
         if (indexReader != null) {
             indexReader.close();
         }
     }
 
+    // we provide a way to close both the reader and writer
     public void close() {
         try {
             indexReader.close();
