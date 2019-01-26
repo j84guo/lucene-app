@@ -1,0 +1,12 @@
+.idea/
+*.iml
+*.ipr
+.gradle/
+
+*.class
+*.jar
+!gradle-wrapper.jar
+out/
+build/
+
+*.avro

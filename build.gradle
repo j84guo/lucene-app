@@ -1,0 +1,28 @@
+apply plugin: "java"
+apply plugin: "application"
+
+mainClassName = "LuceneApp"
+
+def luceneVersion = "7.1.0"
+def testNgVersion = "6.14.3"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.apache.lucene:lucene-core:${luceneVersion}"
+    implementation "org.apache.lucene:lucene-queryparser:${luceneVersion}"
+    testImplementation "org.testng:testng:${testNgVersion}"
+}
+
+// Fun fact, Gradle builds a test suite and run it programmatically without needing an xml configuration
+// http://static.javadoc.io/org.testng/testng/6.8.21/org/testng/TestNG.html
+test {
+    useTestNG()
+    testLogging {
+        outputs.upToDateWhen { false }
+        showStandardStreams = true
+    }
+}
+
