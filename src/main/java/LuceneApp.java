@@ -31,7 +31,12 @@ public class LuceneApp {
 
   private boolean shouldResetReader = false;
 
-  private String[][] defaultDocuments = {{"foo", "bar"}, {"go", "lang"}, {"alice", "bob"}, {"fire", "truck"}};
+  private String[][] defaultDocuments = {
+      {"foo", "bar"},
+      {"go", "lang"},
+      {"alice", "in wonder land"},
+      {"fire", "truck"}
+  };
 
   public LuceneApp() throws IOException {
     initIndex();

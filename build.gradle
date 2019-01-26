@@ -25,4 +25,3 @@ test {
         showStandardStreams = true
     }
 }
-
