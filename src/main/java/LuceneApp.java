@@ -10,6 +10,7 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
@@ -35,7 +36,8 @@ public class LuceneApp {
       {"foo", "bar"},
       {"go", "lang"},
       {"alice", "in wonder land"},
-      {"fire", "truck"}
+      {"fire", "truck"},
+      {"todo", "delete"}
   };
 
   public LuceneApp() throws IOException {
@@ -77,6 +79,10 @@ public class LuceneApp {
     doc.add(new TextField("title", title, Field.Store.YES));
     doc.add(new TextField("body", body, Field.Store.YES));
     indexWriter.addDocument(doc);
+  }
+
+  public void deleteDocuments(Term term) throws IOException {
+    indexWriter.deleteDocuments(term);
   }
 
   public void commitWriter() throws IOException {

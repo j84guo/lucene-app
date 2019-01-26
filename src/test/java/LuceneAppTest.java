@@ -1,4 +1,5 @@
 import java.util.List;
+import javax.management.Query;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
@@ -103,5 +104,15 @@ public class LuceneAppTest {
 
     List<Document> res = app.search(booleanQuery);
     System.out.println(res);
+  }
+
+  @Test
+  public void testDeleteDocument() throws Exception {
+    Term term = new Term("title", "todo");
+    app.deleteDocuments(term);
+    app.commitWriter();
+    TermQuery query = new TermQuery(term);
+    List<Document> res = app.search(query);
+    Assert.assertEquals(res.size(), 0);
   }
 }
