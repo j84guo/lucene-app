@@ -1,3 +1,6 @@
+import java.util.List;
+import org.apache.lucene.document.Document;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -5,6 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
 
 public class LuceneAppTest {
   @BeforeSuite
@@ -37,8 +41,12 @@ public class LuceneAppTest {
     System.out.println("@AfterMethod");
   }
 
+  // assume default docs contain foo:bar
   @Test
-  public void test1() {
-    System.out.println("Test1 is running!");
+  public void testDefaultDocuments() throws Exception {
+    LuceneApp app = new LuceneApp();
+    List<Document> res = app.search("body", "bar");
+    Assert.assertEquals(1, res.size());
+    Assert.assertEquals("foo", res.get(0).get("title"));
   }
 }
